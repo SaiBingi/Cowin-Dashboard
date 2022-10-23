@@ -1,0 +1,23 @@
+.graph-container {
+  background-color: #1c1c2b;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.bar-chart {
+  border-radius: 10px;
+  width: 10px;
+  border-width: 10px;
+}
+
+.graph-heading {
+  color: #94a3b8;
+  font-weight: 600;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}

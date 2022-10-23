@@ -1,0 +1,61 @@
+.bg-container {
+  background-color: #161625;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Roboto';
+  min-height: 100vh;
+}
+
+.graphs-container {
+  width: 85%;
+}
+
+.website-logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.website-logo {
+  width: 45px;
+  height: 45px;
+  margin-right: 10px;
+}
+
+.website-logo-heading {
+  color: #2cc6c6;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.heading {
+  color: #cbd5e1;
+  font-weight: 600;
+  font-size: 25px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.failure-heading {
+  font-family: 'Bree Serif';
+  color: #ffffff;
+  font-size: 25px;
+}
+
+.failure-view {
+  width: 450px;
+  height: 350px;
+}
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 65vh;
+}
+
+.failure {
+  text-align: center;
+}
