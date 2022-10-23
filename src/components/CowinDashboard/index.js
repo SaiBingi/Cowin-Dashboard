@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import Loader from 'react-loader-spinner'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 import VaccinationCoverage from '../VaccinationCoverage'
 import VaccinationByGender from '../VaccinationByGender'
 import VaccinationByAge from '../VaccinationByAge'
@@ -25,36 +26,35 @@ class CowinDashboard extends Component {
     const covidVaccinationDataApiUrl =
       'https://apis.ccbp.in/covid-vaccination-data'
 
-    const response = await fetch(covidVaccinationDataApiUrl)
-
-    if (response.ok === true) {
+    try {
+      const response = await fetch(covidVaccinationDataApiUrl)
       const data = await response.json()
 
-      console.log(data)
+      //   console.log(data)
 
-      const updatedData = {
-        last7DaysVaccination: data.last_7_days_vaccination.map(eachDayData => ({
-          vaccineDate: eachDayData.vaccine_date,
-          dose1: eachDayData.dose_1,
-          dose2: eachDayData.dose_2,
-        })),
-        vaccinationByAge: data.vaccination_by_age.map(each => ({
-          age: each.age,
-          count: each.count,
-        })),
-        vaccinationByGender: data.vaccination_by_gender.map(each => ({
-          gender: each.gender,
-          count: each.count,
-        })),
+      const formattedData = {
+        last7DaysVaccination: data.last_7_days_vaccination,
+        vaccinationByAge: data.vaccination_by_age,
+        vaccinationByGender: data.vaccination_by_gender,
       }
 
-      //   console.log(updatedData)
+      const last7DaysVaccination = formattedData.last7DaysVaccination.map(
+        eachVaccination => ({
+          dose1: eachVaccination.dose_1,
+          dose2: eachVaccination.dose_2,
+          vaccineDate: eachVaccination.vaccine_date,
+        }),
+      )
+
+      const updatedProductsList = {...formattedData, last7DaysVaccination}
+
+      //   console.log(updatedProductsList)
 
       this.setState({
         apiStatus: apiStatusConstants.success,
-        productsList: updatedData,
+        productsList: updatedProductsList,
       })
-    } else {
+    } catch (error) {
       //   console.log(error.message)
       this.setState({apiStatus: apiStatusConstants.failure})
     }
@@ -89,12 +89,12 @@ class CowinDashboard extends Component {
   )
 
   renderLoaderView = () => (
-    <div className="loader">
+    <div testid="loader" className="loader">
       <Loader type="ThreeDots" color="#ffffff" height={80} width={80} />
     </div>
   )
 
-  renderViewsBasedOnAPIStatus = () => {
+  renderProducts = () => {
     const {apiStatus} = this.state
 
     switch (apiStatus) {
@@ -122,7 +122,7 @@ class CowinDashboard extends Component {
             <h1 className="website-logo-heading">Co-WIN</h1>
           </div>
           <h1 className="heading">CoWIN Vaccination in India</h1>
-          {this.renderViewsBasedOnAPIStatus()}
+          {this.renderProducts()}
         </div>
       </div>
     )
